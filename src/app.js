@@ -1,32 +1,33 @@
+const users = require("./routes/user.routes");
+const auth = require("./routes/auth.routes");
 const express = require("express");
-require("dotenv").config();
+const app = express();
+const mongoose = require("mongoose");
+const http = require("http").Server(app);
+const cors = require("cors");
 
-const App = express();
+//require("dotenv").config();
+const dbURI =
+  "mongodb+srv://ipanel_diego:cordoba12@ipaneltwilio.e2xn2.mongodb.net/Ipanel-twilio?retryWrites=true&w=majority";
 
-App.use(express.urlencoded({ extended: true }));
-App.use(express.json());
+//Connection to MongoDB(Atlas)
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.log("Could not connect to MongoDB..."));
 
-const PORT = process.env.PORT;
+//Set up app
+app.use(cors());
+app.use(express.json());
 
-//Home route
-App.get("/", (req, res) => {
-  res.send("Welcome!!");
-});
-const WA = require("./helper/send_sms");
+//Routes
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
-//Route for WhatsApp
-App.post("/whatsapp", async (req, res) => {
-  let message = req.body.Body;
-  let senderID = req.body.From;
-
-  console.log(message);
-  console.log(senderID);
-
-  // Write a function to send message back to WhatsApp
-  await WA.sendMessage("Hello from the other side", senderID);
-});
-
-//Start server
-App.listen(PORT, () => {
-  console.log(`Server is up and running at ${PORT}`);
-});
+//Server
+const port = 4000;
+http.listen(port, () => console.log(`Listening on port ${port}...`));
