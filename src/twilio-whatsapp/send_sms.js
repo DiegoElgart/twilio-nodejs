@@ -6,6 +6,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken, { lazyLoading: true });
 
 const sendMessage = async (message, senderID, link) => {
+  //console.log(typeof senderID);
   try {
     await client.messages.create({
       to: "whatsapp:" + senderID,

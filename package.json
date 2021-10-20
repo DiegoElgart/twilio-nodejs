@@ -12,9 +12,9 @@
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.10",
+    "nodemon": "^2.0.14",
     "twilio": "^3.69.0"
   },
-  "devDependencies": {},
   "scripts": {
     "run": "node src/app.js",
     "start": "nodemon ."
