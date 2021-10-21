@@ -11,15 +11,12 @@ router.post("/send", async (req, res) => {
   data.forEach(function (item) {
     let _numbers = [];
     _numbers.push(item.number);
-    let numbers = JSON.stringify(_numbers);
-    //console.log(numbers);
+    let numbers = _numbers[0];
+    console.log(numbers);
 
-    let proccesedNumbers = numbers
-      .replace(/0/, "whatsapp:+972")
-      .replace("[", "")
-      .replace("]", "");
+    let proccesedNumbers = numbers.replace(/0/, "whatsapp:+972");
 
-    console.log(proccesedNumbers == "whatsapp:+972523926909");
+    //console.log(proccesedNumbers === "whatsapp:+972523926909");
 
     // get all links in an array
     let _links = [];
