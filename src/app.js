@@ -1,7 +1,13 @@
 const express = require("express");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 const App = express();
+
+//connect to MongoDb
+const dbURI =
+  "mongodb+srv://ipanel_diego:cordoba12@ipaneltwilio.e2xn2.mongodb.net/Ipanel-twilio?retryWrites=true&w=majority";
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
