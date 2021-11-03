@@ -1,4 +1,20 @@
-const Joi = require("joi");
+const { verfySingUp } = require("../middleware");
+const verifySingUp = require("../middleware/verifySingUp");
+const controller = require("../controllers/auth.controller");
+
+module.exports = function (app) {
+  app.use(function (req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
+  app.post("/signup", verifySingUp.checkDuplicateEmail, controller.signup);
+  app.post("/signin", controller.signin);
+};
+
+/* const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const { User, schema } = require("../models/user.models");
 
@@ -32,3 +48,4 @@ function validate(req) {
 }
 
 module.exports = router;
+ */

@@ -18,16 +18,20 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch(err => console.log("Could not connect to MongoDB"));
+  .catch((err) => console.log("Could not connect to MongoDB"));
 
 //Set up app
 app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use("/api/users", users);
+
+require("./routes/auth.routes")(app);
+
+/* app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/sendMessage", sendMessage);
+ */
 
 //Server
 const port = 4000;

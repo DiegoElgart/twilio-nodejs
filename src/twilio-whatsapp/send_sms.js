@@ -21,3 +21,4 @@ const sendMessage = async (message, senderID, link) => {
 module.exports = {
   sendMessage,
 };
+  
