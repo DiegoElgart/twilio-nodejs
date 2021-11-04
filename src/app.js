@@ -8,6 +8,7 @@ const http = require("http").Server(app);
 const cors = require("cors");
 
 //require("dotenv").config();
+
 const dbURI =
   "mongodb+srv://ipanel_diego:cordoba12@ipaneltwilio.e2xn2.mongodb.net/Ipanel-twilio?retryWrites=true&w=majority";
 
@@ -18,7 +19,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch((err) => console.log("Could not connect to MongoDB"));
+  .catch(err => console.log("Could not connect to MongoDB: ", err));
 
 //Set up app
 app.use(cors());
@@ -27,6 +28,7 @@ app.use(express.json());
 //Routes
 
 require("./routes/auth.routes")(app);
+app.use("/api", sendMessage);
 
 /* app.use("/api/users", users);
 app.use("/api/auth", auth);

@@ -1,11 +1,11 @@
-const sendMessage = require("../twilio-whatsapp/send_sms");
+//const sendMessage = require("../controllers/sendWhatsapp.controller");
 
 const express = require("express");
 const router = express.Router();
 
 router.post("/send", async (req, res) => {
   const data = req.body;
-
+console.log(data)
   // separates for each element received in the request body to his array
 
   data.forEach(function (item) {

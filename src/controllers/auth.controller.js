@@ -14,7 +14,7 @@ exports.signup = (req, res) => {
     .then(() => {
       res.send({ message: "User was registered successfully!" });
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).send({ message: err.message });
     });
 };
@@ -23,7 +23,7 @@ exports.signin = (req, res) => {
   User.findOne({
     email: req.body.email,
   })
-    .then((user) => {
+    .then(user => {
       if (!user) {
         return res.status(404).send({ message: "User Not Found!" });
       }
@@ -38,7 +38,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      let token = jwt.sign({ id: user.dataValues.userId }, config.secret);
+      let token = jwt.sign({ id: user._id }, config.secret);
 
       res.status(200).send({
         userId: user.id,
@@ -47,7 +47,7 @@ exports.signin = (req, res) => {
         token: token,
       });
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).send({ message: err.message });
     });
 };

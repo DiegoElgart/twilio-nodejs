@@ -11,7 +11,7 @@
     "express": "^4.17.1",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.10",
+    "mongoose": "^6.0.12",
     "nodemon": "^2.0.14",
     "twilio": "^3.69.0"
   },
